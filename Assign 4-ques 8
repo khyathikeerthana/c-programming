@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+// Declare a union variable called "data" that can store an integer or a float
+union myUnion {
+  int i;
+  float f;
+} data;
+
+int main() {
+  char input[10]; // We'll use this to read user input
+
+  // Prompt the user to enter a value of their choice
+  printf("Enter a value of your choice (integer or float): ");
+  fgets(input, 10, stdin); // Read user input from stdin
+
+  // Check if the user entered an integer or a float
+  if (sscanf(input, "%d", &data.i) == 1) {
+    // User entered an integer, store it in the integer member of the union
+    printf("You entered an integer: %d\n", data.i);
+  } else if (sscanf(input, "%f", &data.f) == 1) {
+    // User entered a float, store it in the float member of the union
+    printf("You entered a float: %.2f\n", data.f);
+  } else {
+    // User did not enter a valid number
+    printf("Invalid input.\n");
+  }
+
+  return 0;
+}
