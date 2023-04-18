@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define a structure for student
+struct Student {
+    int roll_no;
+    char stud_name[50];
+    int mark1;
+    int mark2;
+    int mark3;
+    int total_marks;
+    float avg_marks;
+};
+
+int main() {
+    int i, j, n;
+    struct Student s[100], temp;
+
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+
+    // Input student details
+    for (i = 0; i < n; i++) {
+        printf("\nEnter the details of student %d: \n", i+1);
+        printf("Roll No: ");
+        scanf("%d", &s[i].roll_no);
+        printf("Name: ");
+        scanf("%s", s[i].stud_name);
+        printf("Mark1: ");
+        scanf("%d", &s[i].mark1);
+        printf("Mark2: ");
+        scanf("%d", &s[i].mark2);
+        printf("Mark3: ");
+        scanf("%d", &s[i].mark3);
+
+        // Calculate total marks and average marks
+        s[i].total_marks = s[i].mark1 + s[i].mark2 + s[i].mark3;
+        s[i].avg_marks = s[i].total_marks / 3.0;
+    }
+
+    // Sort records in descending order of marks using Bubble Sort
+    for (i = 0; i < n-1; i++) {
+        for (j = 0; j < n-i-1; j++) {
+            if (s[j].total_marks < s[j+1].total_marks) {
+                temp = s[j];
+                s[j] = s[j+1];
+                s[j+1] = temp;
+            }
+        }
+    }
+
+    // Display student details
+    printf("\nStudent details sorted in descending order of marks:\n");
+    printf("Roll No\tName\tMark1\tMark2\tMark3\tTotal Marks\tAvg Marks\n");
+    for (i = 0; i < n; i++) {
+        printf("%d\t%s\t%d\t%d\t%d\t%d\t\t%.2f\n", s[i].roll_no, s[i].stud_name, s[i].mark1, s[i].mark2, s[i].mark3, s[i].total_marks, s[i].avg_marks);
+    }
+
+    return 0;
+}
